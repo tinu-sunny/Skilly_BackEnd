@@ -1,0 +1,18 @@
+const express = require('express')
+require('dotenv').config()
+require("./config/db")
+const cors =require('cors')
+const route=require('./router/route')
+
+const serverSkilly = express()
+serverSkilly.use(cors())
+
+serverSkilly.use(express.json())
+serverSkilly.use(route)
+
+serverSkilly.get('/',(req,res)=>{
+    res.send("welcome to skilly Backend")
+})
+
+serverSkilly.listen(3000,()=>{console.log("server is on the port 3000");
+})
