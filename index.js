@@ -15,4 +15,4 @@ serverSkilly.get('/',(req,res)=>{
 })
 
 serverSkilly.listen(3000,()=>{console.log("server is on the port 3000");
-})
+}) 
