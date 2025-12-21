@@ -1,6 +1,6 @@
 const users =require('../models/userModel')
 
-
+// registration
 exports.registerUser = async(req,res)=>{
 
    
@@ -36,3 +36,31 @@ exports.registerUser = async(req,res)=>{
 }
 
 
+// manuval Login
+
+exports.userlogin = async(req,res)=>{
+    try{
+
+        const {email,password}=req.body
+             const loginUser= await users.findOne({email})
+             console.log(loginUser);
+
+          if(loginUser && loginUser.password != password){
+            res.status(400).json("password mismatch")
+          }
+          else if (loginUser && loginUser.password == password){
+           res.status(200).json({message:"logined",loginUser})
+          }
+
+        else{
+             res.status(404).json('not vaild user')
+        }
+
+             
+    }
+    catch(err){
+        console.log(err);
+        res.send(err)
+        
+    }
+}
