@@ -29,7 +29,18 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
 
+    },
+    status:{
+        type:Boolean,
+        required:true,
+        default:true
+    },
+
+    regdate:{
+        type:String,
+        required:true
     }
+
     
 
 })

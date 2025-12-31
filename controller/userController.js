@@ -6,7 +6,7 @@ exports.registerUser = async(req,res)=>{
    
     
     try{
- const {email,username,phone,profile,role,password}=req.body
+ const {email,username,phone,profile,role,password,status,regdate}=req.body
     const emailExists  = await users.findOne({email})
     const phoneExists  = await users.findOne({phone})
     // console.log(oldUser);
@@ -18,7 +18,7 @@ exports.registerUser = async(req,res)=>{
            return   res.status(402).json("Phone Number  is Already registered ")
     }
     else{
-        const newUser= new users({email,username,phone,profile,role,password})
+        const newUser= new users({email,username,phone,profile,role,password,status,regdate})
         await newUser.save()
         res.status(200).json({message:"  Registration susccesfull",newUser})
     }
@@ -62,5 +62,24 @@ exports.userlogin = async(req,res)=>{
         console.log(err);
         res.send(err)
         
+    }
+}
+
+
+
+// admin user view
+
+exports.viewUsers=async(req,res)=>{
+    try{
+        const userData= await users.find({ role: { $ne: "admin" } })
+        
+        res.status(200).json({message:"user data",userData})
+
+    }
+
+    catch(err){
+        console.log(err);
+        
+
     }
 }
