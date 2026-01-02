@@ -1,8 +1,9 @@
 const express = require('express')
 require('dotenv').config()
-require("./config/db")
 const cors =require('cors')
 const route=require('./router/route')
+require("./config/db")
+
 
 const serverSkilly = express()
 serverSkilly.use(cors())
