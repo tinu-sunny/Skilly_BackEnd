@@ -10,6 +10,7 @@ serverSkilly.use(cors())
 
 serverSkilly.use(express.json())
 serverSkilly.use(route)
+serverSkilly.use('/uploads',express.static('./uploads'))
 
 serverSkilly.get('/',(req,res)=>{
     res.send("welcome to skilly Backend")
