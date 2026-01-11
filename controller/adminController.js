@@ -1,5 +1,8 @@
 const contact =require('../models/contactModel')
 const carrerfield =require('../models/carrerfieldModel')
+const users = require('../models/userModel')
+
+// inquiry/contact view admin
 
 exports.contactViewAdmin =async(req,res)=>{
     try{
@@ -12,6 +15,7 @@ exports.contactViewAdmin =async(req,res)=>{
     }
 }
 
+// carrefielsAdd by admin
 
 exports.carrerfieldAdd = async (req, res) => {
  
@@ -40,4 +44,51 @@ exports.carrerfieldAdd = async (req, res) => {
     res.send("error",err);
   }
 };
+
+
+// carrerfield view admin 
+
+exports.carrerfieldAdminView = async (req,res) =>{
+
+        try{
+        const carrefields = await carrerfield.find()
+        res.status(200).json({message:"carrerfieds  are here " ,carrefields})
+    }
+    catch(err){
+        console.log(err);
+        
+    }
+
+}
+
+
+// admin user view
+
+exports.viewUsers=async(req,res)=>{
+    try{
+        const userData= await users.find({ role: { $ne: "admin" } })
+        
+        res.status(200).json({message:"user data",userData})
+
+    }
+
+    catch(err){
+        console.log(err);
+        res.status(500).json({succes:false,message:"Failed to fetch users", err})
+        
+
+    }
+}
+
+exports.setUserActiveStatus = async(req,res)=>{
+
+    try{
+  const updateStatus =  await users.findOneAndUpdate({email})
+    }
+
+    catch(err){
+        console.log('error in controller',err);
+        
+    }
+}
 

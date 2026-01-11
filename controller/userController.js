@@ -1,5 +1,6 @@
 const users =require('../models/userModel')
 const contact =require('../models/contactModel')
+const jwt =require('jsonwebtoken')
 // registration
 exports.registerUser = async(req,res)=>{
 
@@ -49,7 +50,10 @@ exports.userlogin = async(req,res)=>{
             res.status(400).json("password mismatch")
           }
           else if (loginUser && loginUser.password == password){
-           res.status(200).json({message:"logined",loginUser})
+            const token = jwt.sign({userMail:loginUser.email,role:loginUser.role},process.env.jwtkey)
+            console.log(token);
+            
+           res.status(200).json({message:"logined",loginUser,token})
           }
 
         else{
@@ -64,26 +68,6 @@ exports.userlogin = async(req,res)=>{
         
     }
 }
-
-
-
-// admin user view
-
-exports.viewUsers=async(req,res)=>{
-    try{
-        const userData= await users.find({ role: { $ne: "admin" } })
-        
-        res.status(200).json({message:"user data",userData})
-
-    }
-
-    catch(err){
-        console.log(err);
-        
-
-    }
-}
-
 
 exports.contactreg =async(req,res)=>{
     try{
