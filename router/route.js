@@ -17,5 +17,6 @@ route.post('/contact',userController.contactreg)
 route.get('/contact-admin-view',adminController.contactViewAdmin)
 route.post('/carrerfield-add',multerConfig.single('thumbnail'),adminController.carrerfieldAdd)
 route.get('/carrerfield-admin-view',adminController.carrerfieldAdminView)
+route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),adminController.setUserActiveStatus)
 
 module.exports=route

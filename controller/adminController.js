@@ -51,7 +51,7 @@ exports.carrerfieldAdd = async (req, res) => {
 exports.carrerfieldAdminView = async (req,res) =>{
 
         try{
-        const carrefields = await carrerfield.find()
+        const carrefields = await carrerfield.find().sort({ _id: -1 });
         res.status(200).json({message:"carrerfieds  are here " ,carrefields})
     }
     catch(err){
@@ -81,9 +81,15 @@ exports.viewUsers=async(req,res)=>{
 }
 
 exports.setUserActiveStatus = async(req,res)=>{
-
+const {status,email}=req.body
     try{
-  const updateStatus =  await users.findOneAndUpdate({email})
+  const updateStatus =  await users.findOneAndUpdate({email},{$set:{status}},{new:true})
+  console.log(updateStatus);
+  await updateStatus.save()
+
+    res.status(200).json({succes:true,message:"user Status Updated", updateStatus})
+  
+// res.send('inside try')
     }
 
     catch(err){

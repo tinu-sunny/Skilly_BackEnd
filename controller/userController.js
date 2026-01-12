@@ -49,6 +49,10 @@ exports.userlogin = async(req,res)=>{
           if(loginUser && loginUser.password != password){
             res.status(400).json("password mismatch")
           }
+
+          else if(loginUser && loginUser.status==false){
+            res.status(403).json({message:"Account As be deactivated conncte to admin for activation"})
+          }
           else if (loginUser && loginUser.password == password){
             const token = jwt.sign({userMail:loginUser.email,role:loginUser.role},process.env.jwtkey)
             console.log(token);
@@ -57,7 +61,7 @@ exports.userlogin = async(req,res)=>{
           }
 
         else{
-             res.status(404).json('not vaild user')
+             res.status(404).json({message:'not vaild user'})
         }
 
              
