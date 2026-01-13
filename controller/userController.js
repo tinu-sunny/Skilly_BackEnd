@@ -47,7 +47,7 @@ exports.userlogin = async(req,res)=>{
              console.log(loginUser);
 
           if(loginUser && loginUser.password != password){
-            res.status(400).json("password mismatch")
+            res.status(400).json({message:"password mismatch"})
           }
 
           else if(loginUser && loginUser.status==false){
@@ -88,4 +88,15 @@ exports.contactreg =async(req,res)=>{
          res.send(err)
         
     }
+}
+
+
+exports.activeuser = async(req,res)=>{
+
+    const{userMail}=req.payload
+
+    const user = await users.findOne({email:userMail})
+    console.log(user);
+    res.status(200).json({message:"user data",user})
+    
 }
