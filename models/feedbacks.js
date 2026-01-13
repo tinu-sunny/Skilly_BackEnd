@@ -8,7 +8,8 @@ const  feedbackSchema = new mongoose.Schema({
     },
     rating:{
         type:String,
-        required:true 
+        required:false ,
+        default:"0"
     },
     status:{
         type:String,
@@ -26,6 +27,10 @@ const  feedbackSchema = new mongoose.Schema({
     usertype:{
        type:String,
        required:true
+    },
+    uploadImg:{
+       type:String,
+       required:false
     }
 
 

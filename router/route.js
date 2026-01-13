@@ -29,6 +29,6 @@ route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),admin
 // student path
 
 route.get('/career-view',jwtMiddleware,roleMiddleware('student'),studentController.carrerfieldview)
-route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),studentController.feedbackAddAPI)
+route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),multerConfig.single('uploadImg'),studentController.feedbackAddAPI)
 
 module.exports=route

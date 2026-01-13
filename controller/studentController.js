@@ -18,11 +18,14 @@ exports.carrerfieldview = async (req,res)=>{
 // feedbackadd  
 
 exports.feedbackAddAPI = async(req,res)=>{
-    const {feedbacktype,rating,status,message,email}=req.body
+    const {feedbacktype,rating,status,message,uploadImg}=req.body
+// const  image = req.file.file 
+console.log("hi",req.files);
 
+const image = req.file? req.file.filename:uploadImg
     const{userMail,role}=req.payload
     try{
-        const feedback = new feedbacks({feedbacktype,rating,status,message,email,usertype:role})
+        const feedback = new feedbacks({feedbacktype,rating,status,message,email:userMail,usertype:role ,uploadImg:image})
         await feedback.save()
         res.status(200).json({message:"feedback Add succesfully",feedback})
     }
