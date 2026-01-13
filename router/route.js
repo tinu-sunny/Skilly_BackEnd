@@ -2,7 +2,7 @@ const express = require('express')
 
 const userController= require('../controller/userController')
 const chatcontroller =require('../controller/chatController')
-const contactController = require('../controller/contactController')
+const contactController = require('../controller/contactController')         
 const adminController=require('../controller/adminController')
 const studentController=require('../controller/studentController')
 const multerConfig = require('../middlewares/multerMiddleware')
@@ -29,5 +29,6 @@ route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),admin
 // student path
 
 route.get('/career-view',jwtMiddleware,roleMiddleware('student'),studentController.carrerfieldview)
+route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),studentController.feedbackAddAPI)
 
 module.exports=route
