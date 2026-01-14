@@ -8,6 +8,7 @@ const studentController=require('../controller/studentController')
 const multerConfig = require('../middlewares/multerMiddleware')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const roleMiddleware = require('../middlewares/roleMiddleware')
+const workingController = require('../controller/workingController')
 const route = express.Router()
 
 
@@ -30,5 +31,9 @@ route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),admin
 
 route.get('/career-view',jwtMiddleware,roleMiddleware('student'),studentController.carrerfieldview)
 route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),multerConfig.single('uploadImg'),studentController.feedbackAddAPI)
+
+// working path
+
+route.post('/post-add-working',jwtMiddleware,roleMiddleware('working'),multerConfig.single('post'),workingController.post)
 
 module.exports=route
