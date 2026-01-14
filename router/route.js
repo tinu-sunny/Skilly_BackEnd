@@ -35,5 +35,6 @@ route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),multe
 // working path
 
 route.post('/post-add-working',jwtMiddleware,roleMiddleware('working'),multerConfig.single('post'),workingController.post)
+route.get('/post-view-working',jwtMiddleware,roleMiddleware('working'),workingController.postview)
 
 module.exports=route
