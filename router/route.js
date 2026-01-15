@@ -26,6 +26,8 @@ route.get('/contact-admin-view',jwtMiddleware,roleMiddleware('admin'),adminContr
 route.post('/carrerfield-add',multerConfig.single('thumbnail'),adminController.carrerfieldAdd)
 route.get('/carrerfield-admin-view' ,jwtMiddleware,roleMiddleware('admin'),adminController.carrerfieldAdminView)
 route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),adminController.setUserActiveStatus)
+route.get('/admin-feedback-view',jwtMiddleware,roleMiddleware('admin'),adminController.adminfeedbackview)
+
 
 // student path
 

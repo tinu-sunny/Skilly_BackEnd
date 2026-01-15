@@ -1,6 +1,7 @@
 const contact =require('../models/contactModel')
 const carrerfield =require('../models/carrerfieldModel')
 const users = require('../models/userModel')
+const feedback = require('../models/feedbacks')
 
 // inquiry/contact view admin
 
@@ -98,3 +99,16 @@ const {status,email}=req.body
     }
 }
 
+
+exports.adminfeedbackview = async(req,res)=>{
+    try{
+        const feedbackdata = await feedback.find().sort({_id:-1})
+        res.status(200).json({message:"feedback details",feedbackdata})
+    }
+
+    catch(err){
+        console.log(err);
+        res.status(402).json({message:"error... try after some time"})
+        
+    }
+}
