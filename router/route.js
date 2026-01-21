@@ -15,6 +15,8 @@ const route = express.Router()
 // index page 
 route.post("/register",userController.registerUser)
 route.post('/login',userController.userlogin)
+route.post('/googlelogin',userController.googlelogin)
+route.post('/googlelogin-datasave',jwtMiddleware,userController.googlelogindatasave)
 route.post('/contact',userController.contactreg)
 
 route.post('/chat',chatcontroller.chat)

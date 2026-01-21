@@ -73,6 +73,49 @@ exports.userlogin = async(req,res)=>{
     }
 }
 
+exports.googlelogin = async(req,res)=>{
+ 
+
+         const{email,password,profile,username,regdate}=req.body
+         console.log(email,password,profile,username);
+         
+           try{
+      const existingUser =await users.findOne({email})
+      if(existingUser){
+         const token = jwt.sign({userMail:existingUser.email,role:existingUser.role},process.env.jwtkey)
+            console.log(token);
+               res.status(200).json({message:"logined",existingUser,token})
+      }
+      else{
+          const newUser = new users({username,email,password,profile,regdate})
+        await newUser.save()
+           const token = jwt.sign({userMail:newUser.email,role:newUser.role},process.env.jwtkey)
+            console.log(token);
+        res.status(200).json({ message:"login",existingUser:newUser,token})
+      }
+   }
+   catch(err){
+      res.status(500).json(err)
+   }
+}
+
+
+exports.googlelogindatasave = async (req,res)=>{
+    const{email,password,profile,username,role}=req.body
+    try{
+        const updateuser = await users.findOneAndUpdate({email},{$set:{email,password,profile,username,role}},{new:true})
+
+         await updateuser.save()
+        res.status(200).json({message :'succes',updateuser})
+    }
+    catch(err){
+        console.log(err);
+        
+        res.status(500).json({message:'unscess',err})
+    }
+
+}
+
 exports.contactreg =async(req,res)=>{
     try{
 
