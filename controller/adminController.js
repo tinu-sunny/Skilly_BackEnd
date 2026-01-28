@@ -67,7 +67,7 @@ exports.carrerfieldAdminView = async (req,res) =>{
 
 exports.viewUsers=async(req,res)=>{
     try{
-        const userData= await users.find({ role: { $ne: "admin" } })
+        const userData= await users.find({ role: { $ne: "admin" } }).sort({_id:-1})
         
         res.status(200).json({message:"user data",userData})
 
@@ -110,5 +110,27 @@ exports.adminfeedbackview = async(req,res)=>{
         console.log(err);
         res.status(402).json({message:"error... try after some time"})
         
+    }
+}
+
+
+// carrefiledview with admin 
+
+exports.admincarrerfield = async(req,res)=>{
+
+    const{id}=req.params
+    console.log("params",req.params);
+    
+    try{
+        const data = await carrerfield.find({_id:id})
+        res.status(200).json({succes:true,message:"data for edit is",data})
+
+    }
+    catch(err){
+
+        console.log(err);
+        res.status(500).json({succes:false,message:"error",err})
+        
+
     }
 }

@@ -76,8 +76,8 @@ exports.userlogin = async(req,res)=>{
 exports.googlelogin = async(req,res)=>{
  
 
-         const{email,password,profile,username,regdate}=req.body
-         console.log(email,password,profile,username);
+         const{email,password,profile,username,regdate,role}=req.body
+         console.log(email,profile,username);
          
            try{
       const existingUser =await users.findOne({email})
@@ -94,9 +94,13 @@ exports.googlelogin = async(req,res)=>{
         res.status(200).json({ message:"login",existingUser:newUser,token})
       }
    }
-   catch(err){
-      res.status(500).json(err)
-   }
+ catch (err) {
+  console.error("GOOGLE LOGIN ERROR 👉", err);
+  res.status(500).json({
+    message: err.message,
+    error: err
+  });
+}
 }
 
 

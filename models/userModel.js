@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
         unique:true
     },
     phone:{
-        type:Number,
-        require:false,
-        // unique:true
+        type:String,
+       
+        default:null
     },
      profile:{
         type:String,
@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true,
+         default:"123456"
 
     },
     status:{
