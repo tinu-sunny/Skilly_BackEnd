@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     status:{
         type:Boolean,
         required:true,
-        default:true
+        default:true    
     },
 
     regdate:{

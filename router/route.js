@@ -29,7 +29,7 @@ route.post('/carrerfield-add',multerConfig.single('thumbnail'),adminController.c
 route.get('/carrerfield-admin-view' ,jwtMiddleware,roleMiddleware('admin'),adminController.carrerfieldAdminView)
 route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),adminController.setUserActiveStatus)
 route.get('/admin-feedback-view',jwtMiddleware,roleMiddleware('admin'),adminController.adminfeedbackview)
-route.get('/carrer-field',jwtMiddleware,roleMiddleware('admin'),adminController.admincarrerfield)
+route.patch('/admin-carrerupdate',multerConfig.single('thumbnail'),jwtMiddleware,roleMiddleware('admin'),adminController.carrerfieldupdate)
 
 
 // student path

@@ -2,6 +2,7 @@ const contact =require('../models/contactModel')
 const carrerfield =require('../models/carrerfieldModel')
 const users = require('../models/userModel')
 const feedback = require('../models/feedbacks')
+const { response } = require('express')
 
 // inquiry/contact view admin
 
@@ -52,7 +53,7 @@ exports.carrerfieldAdd = async (req, res) => {
 exports.carrerfieldAdminView = async (req,res) =>{
 
         try{
-        const carrefields = await carrerfield.find().sort({ _id: -1 });
+        const carrefields = await carrerfield.find().sort({ _id:-1 });
         res.status(200).json({message:"carrerfieds  are here " ,carrefields})
     }
     catch(err){
@@ -113,24 +114,28 @@ exports.adminfeedbackview = async(req,res)=>{
     }
 }
 
+// update career filelds 
+exports.carrerfieldupdate = async(req,res)=>{
 
-// carrefiledview with admin 
 
-exports.admincarrerfield = async(req,res)=>{
-
-    const{id}=req.params
-    console.log("params",req.params);
-    
     try{
-        const data = await carrerfield.find({_id:id})
-        res.status(200).json({succes:true,message:"data for edit is",data})
 
+        console.log(req.body);
+        const { _id,coursename,avgsalary,description,category} = req.body
+           const thumbnail = req.file.filename ||  req.body.thumbnail
+       console.log(thumbnail);
+        console.log(req.body);
+        // res.send('inside try')
+  const updatecareefield =  await carrerfield.findOneAndUpdate({_id},{$set:{coursename, avgsalary, description,category,thumbnail}},{new:true})
+
+        res.status(200).json({succes:true,message:"data",updatecareefield})
+        
+        
+               
     }
     catch(err){
-
         console.log(err);
-        res.status(500).json({succes:false,message:"error",err})
+        res.status(500).json({succes:false,message:"error in  back end logic",err})
         
-
     }
 }
