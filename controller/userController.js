@@ -89,9 +89,8 @@ exports.googlelogin = async(req,res)=>{
       else{
           const newUser = new users({username,email,password,profile,regdate})
         await newUser.save()
-           const token = jwt.sign({userMail:newUser.email,role:newUser.role},process.env.jwtkey)
-            console.log(token);
-        res.status(200).json({ message:"login",existingUser:newUser,token})
+         
+        res.status(200).json({ message:"login",existingUser:newUser})
       }
    }
  catch (err) {
@@ -110,7 +109,9 @@ exports.googlelogindatasave = async (req,res)=>{
         const updateuser = await users.findOneAndUpdate({email},{$set:{email,password,profile,username,role}},{new:true})
 
          await updateuser.save()
-        res.status(200).json({message :'succes',updateuser})
+           const token = jwt.sign({userMail:email,role:role},process.env.jwtkey)
+            console.log(token);
+        res.status(200).json({message :'succes',updateuser,token})
     }
     catch(err){
         console.log(err);

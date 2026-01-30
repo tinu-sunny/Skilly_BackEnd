@@ -30,6 +30,7 @@ route.get('/carrerfield-admin-view' ,jwtMiddleware,roleMiddleware('admin'),admin
 route.put('/admin-user-statusupdate',jwtMiddleware,roleMiddleware('admin'),adminController.setUserActiveStatus)
 route.get('/admin-feedback-view',jwtMiddleware,roleMiddleware('admin'),adminController.adminfeedbackview)
 route.patch('/admin-carrerupdate',multerConfig.single('thumbnail'),jwtMiddleware,roleMiddleware('admin'),adminController.carrerfieldupdate)
+route.delete('/admin-carrerfield-delete',jwtMiddleware,roleMiddleware("admin"),adminController.carrerfieldDelete)
 
 
 // student path
