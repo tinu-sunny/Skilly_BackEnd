@@ -9,6 +9,7 @@ const multerConfig = require('../middlewares/multerMiddleware')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const roleMiddleware = require('../middlewares/roleMiddleware')
 const workingController = require('../controller/workingController')
+const { jobAdd } = require('../controller/CompanyController')
 const route = express.Router()
 
 
@@ -42,5 +43,13 @@ route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),multe
 
 route.post('/post-add-working',jwtMiddleware,roleMiddleware('working'),multerConfig.single('post'),workingController.post)
 route.get('/post-view-working',jwtMiddleware,roleMiddleware('working'),workingController.postview)
+
+// company paths
+
+route.post('/job-add',jwtMiddleware,roleMiddleware('company'),jobAdd)
+
+
+
+
 
 module.exports=route
