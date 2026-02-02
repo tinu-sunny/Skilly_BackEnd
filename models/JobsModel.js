@@ -47,7 +47,12 @@ location:{
 education:{
     type:String,
     required:true
+},
+companyemail:{
+    type:String,
+    required:true
 }
+
 
 })
 
