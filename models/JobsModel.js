@@ -51,6 +51,18 @@ education:{
 companyemail:{
     type:String,
     required:true
+},
+companyname:{
+    type:String,
+    required:false
+},
+salary:{
+    type:String,
+    required:true
+},
+comapnyProfile:{
+    type:String,
+    required:false
 }
 
 

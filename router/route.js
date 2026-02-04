@@ -9,7 +9,7 @@ const multerConfig = require('../middlewares/multerMiddleware')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const roleMiddleware = require('../middlewares/roleMiddleware')
 const workingController = require('../controller/workingController')
-const { jobAdd, jobViewCompany, jobeditcompany } = require('../controller/CompanyController')
+const { jobAdd, jobViewCompany, jobeditcompany, jobaplicationstatus, jobdlete } = require('../controller/CompanyController')
 const route = express.Router()
 
 
@@ -39,6 +39,8 @@ route.delete('/admin-carrerfield-delete',jwtMiddleware,roleMiddleware("admin"),a
 route.get('/career-view',jwtMiddleware,roleMiddleware('student'),studentController.carrerfieldview)
 route.post('/feedback-add-student',jwtMiddleware,roleMiddleware('student'),multerConfig.single('uploadImg'),studentController.feedbackAddAPI)
 
+route.get('/student-job-view',jwtMiddleware,roleMiddleware('student'),studentController.studentjobsview)
+
 // working path
 
 route.post('/post-add-working',jwtMiddleware,roleMiddleware('working'),multerConfig.single('post'),workingController.post)
@@ -49,7 +51,8 @@ route.get('/post-view-working',jwtMiddleware,roleMiddleware('working'),workingCo
 route.post('/job-add',jwtMiddleware,roleMiddleware('company'),jobAdd)
 route.get('/job-view-company',jwtMiddleware,roleMiddleware('company'),jobViewCompany)
 route.patch('/job-edit-company',jwtMiddleware,roleMiddleware('company'),jobeditcompany)
-
+route.patch('/job-aplication-company-close',jwtMiddleware,roleMiddleware('company'),jobaplicationstatus)
+route.delete('/job-company-delete',jwtMiddleware,roleMiddleware('company'),jobdlete)
 
 
 
