@@ -10,7 +10,7 @@ const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const roleMiddleware = require('../middlewares/roleMiddleware')
 const workingController = require('../controller/workingController')
 const { jobAdd, jobViewCompany, jobeditcompany, jobaplicationstatus, jobdlete } = require('../controller/CompanyController')
-const { workshopAdd } = require('../controller/institutionController')
+const { workshopAdd, viewworkshopinstitution } = require('../controller/institutionController')
 const route = express.Router()
 
 
@@ -59,6 +59,7 @@ route.delete('/job-company-delete',jwtMiddleware,roleMiddleware('company'),jobdl
 // instution 
 
 route.post('/add-workshop-institution',multerConfig.single('poster'),jwtMiddleware,roleMiddleware('institution'),workshopAdd)
+route.get('/view-workshop-institution',jwtMiddleware,roleMiddleware('institution'),viewworkshopinstitution)
 
 
 module.exports=route

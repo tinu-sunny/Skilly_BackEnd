@@ -29,3 +29,20 @@ await newworkshop.save()
         
     }
 }
+
+
+exports.viewworkshopinstitution = async (req,res)=>{
+
+    const {userMail}= req.payload
+    try{
+
+        const data =  await  workshop.find({contact:userMail})
+
+        res.status(200).json({success:true,message:"success",data})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({success:false,message:"unsuccessfull",err})
+        
+    }
+}
