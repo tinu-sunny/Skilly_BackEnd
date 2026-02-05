@@ -10,6 +10,7 @@ const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const roleMiddleware = require('../middlewares/roleMiddleware')
 const workingController = require('../controller/workingController')
 const { jobAdd, jobViewCompany, jobeditcompany, jobaplicationstatus, jobdlete } = require('../controller/CompanyController')
+const { workshopAdd } = require('../controller/institutionController')
 const route = express.Router()
 
 
@@ -23,6 +24,7 @@ route.post('/contact',userController.contactreg)
 route.post('/chat',chatcontroller.chat)
 // common api calls
 route.get('/active-user',jwtMiddleware,userController.activeuser)
+route.get('/all-users',jwtMiddleware,userController.allusers)
 // admin Path
 route.get('/admin-user-management',jwtMiddleware,roleMiddleware('admin'),adminController.viewUsers)
 route.get('/contact-admin-view',jwtMiddleware,roleMiddleware('admin'),adminController.contactViewAdmin)
@@ -54,6 +56,9 @@ route.patch('/job-edit-company',jwtMiddleware,roleMiddleware('company'),jobeditc
 route.patch('/job-aplication-company-close',jwtMiddleware,roleMiddleware('company'),jobaplicationstatus)
 route.delete('/job-company-delete',jwtMiddleware,roleMiddleware('company'),jobdlete)
 
+// instution 
+
+route.post('/add-workshop-institution',multerConfig.single('poster'),jwtMiddleware,roleMiddleware('institution'),workshopAdd)
 
 
 module.exports=route

@@ -148,3 +148,15 @@ exports.activeuser = async(req,res)=>{
     res.status(200).json({message:"user data",user})
     
 }
+
+exports.allusers = async(req,res)=>{
+    
+    try{
+        const allusers = await users.find()
+    res.status(200).json({ success:true,message:"all users",allusers})
+} catch(err){
+    console.log("err in c",err);
+    
+    res.status(500).json({success:false,messsage:"error",err})
+}
+}
